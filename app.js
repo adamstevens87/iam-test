@@ -240,6 +240,7 @@ function receivedMessage(event) {
 
 
   function getUserInfo(first_name, last_name) {
+    console.log("getUserInfo WAS CALLED HERE ************************************************************************************");
     return new Promise(function (resolve, reject) {
       request (
           ("https://graph.facebook.com/v2.6/" + senderID + "?fields=first_name,last_name,profile_pic,locale,timezone,gender,last_ad_referral&access_token=" + PAGE_ACCESS_TOKEN),
@@ -261,7 +262,6 @@ function receivedMessage(event) {
 
 
 
-   testing();
 
 
 
@@ -902,13 +902,6 @@ function sendAccountLinking(recipientId) {
   callSendAPI(messageData);
 }
 
-
-function testing() {
-
-  console.log("Something here");
-
-  return getUserInfo(first_name, last_name);
-}
 
 
 /*
