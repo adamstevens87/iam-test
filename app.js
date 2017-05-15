@@ -261,9 +261,15 @@ function receivedMessage(event) {
   };
 
 
+  function Stuff(first_name, last_name){
+
+    console.log("Stuff was called here ************************************************************************************");
+    return new Promise(function (resolve, reject) {
+    return getUserInfo(first_name, last_name);
+  }
 
 
-
+  Stuff(first_name, last_name);
 
   if (isEcho) {
     // Just logging message echoes to console
