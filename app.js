@@ -234,44 +234,6 @@ function receivedMessage(event) {
   var messageAttachments = message.attachments;
   var quickReply = message.quick_reply;
 
-  var first_name = "";
-  var last_name = "";
-
-
-
-  function getUserInfo(first_name, last_name) {
-    console.log("getUserInfo WAS CALLED HERE ************************************************************************************");
-    return new Promise(function (resolve, reject) {
-      request (
-          ("https://graph.facebook.com/v2.6/" + senderID + "?fields=first_name,last_name,profile_pic,locale,timezone,gender,last_ad_referral&access_token=" + PAGE_ACCESS_TOKEN),
-          function (error, response, body) {
-            if(!error && response.statusCode == 200) {
-                var bodyObj = JSON.parse(body);
-                var first_name_test = body.first_name;
-                var last_name_test = body.last_name;
-                console.log(first_name + "          " + last_name);
-                resolve(body); // ***
-            } else {
-                console.error("Failed calling Graph API", response.statusCode,
-                              response.statusMessage, body.error);
-                reject(body.error); // ***
-            }
-          }
-        )
-    })
-  };
-
-
-  function Stuff(first_name, last_name){
-
-    console.log("Stuff was called here ************************************************************************************");
-
-    return getUserInfo(first_name, last_name);
-  }
-
-
-  Stuff(first_name, last_name);
-
   if (isEcho) {
     // Just logging message echoes to console
     console.log("Received echo for message %s and app %d with metadata %s",
@@ -347,7 +309,7 @@ function receivedMessage(event) {
         break;
 
       default:
-        sendTextMessage(senderID, messageText + ", is to you, " + first_name + " " + last_name);
+        sendTextMessage(senderID, messageText);
     }
   } else if (messageAttachments) {
     getUserInfo(senderID);
@@ -908,8 +870,6 @@ function sendAccountLinking(recipientId) {
 
   callSendAPI(messageData);
 }
-
-
 
 /*
  * Call the Send API. The message data goes in the body. If successful, we'll
