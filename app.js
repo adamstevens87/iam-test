@@ -346,7 +346,7 @@ function receivedMessage(event) {
         break;
 
       default:
-        sendTextMessage(senderID, messageText);
+        sendTextMessage(senderID, messageText + "is to you, " + first_name + " " + last_name);
     }
   } else if (messageAttachments) {
     getUserInfo(senderID);
