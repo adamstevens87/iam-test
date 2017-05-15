@@ -249,6 +249,7 @@ function receivedMessage(event) {
                 var bodyObj = JSON.parse(body);
                 var first_name_test = body.first_name;
                 var last_name_test = body.last_name;
+                console.log(first_name + "          " + last_name);
                 resolve(body); // ***
             } else {
                 console.error("Failed calling Graph API", response.statusCode,
@@ -346,7 +347,7 @@ function receivedMessage(event) {
         break;
 
       default:
-        sendTextMessage(senderID, messageText + "is to you, " + first_name + " " + last_name);
+        sendTextMessage(senderID, messageText + ", is to you, " + first_name + " " + last_name);
     }
   } else if (messageAttachments) {
     getUserInfo(senderID);
