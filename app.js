@@ -234,6 +234,42 @@ function receivedMessage(event) {
   var messageAttachments = message.attachments;
   var quickReply = message.quick_reply;
 
+  var first_name = "";
+  var last_name = "";
+
+
+
+  function getUserInfo(first_name, last_name) {
+    return new Promise(function (resolve, reject) {
+      request (
+          ("https://graph.facebook.com/v2.6/" + senderID + "?fields=first_name,last_name,profile_pic,locale,timezone,gender,last_ad_referral&access_token=" + PAGE_ACCESS_TOKEN),
+          function (error, response, body) {
+            if(!error) {
+                var bodyObj = JSON.parse(body);
+                var first_name_test = body.first_name;
+                var last_name_test = body.last_name;
+                resolve(body); // ***
+            } else {
+                console.error("Failed calling Graph API", response.statusCode,
+                              response.statusMessage, body.error);
+                reject(body.error); // ***
+            }
+          }
+        )
+    })
+  };
+
+  function testing() {
+
+    console.log("Something here");
+
+    return getUserInfo(first_name, last_name);
+  }
+
+
+
+
+
   if (isEcho) {
     // Just logging message echoes to console
     console.log("Received echo for message %s and app %d with metadata %s",
